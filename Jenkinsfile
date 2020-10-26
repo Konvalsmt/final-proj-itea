@@ -27,7 +27,7 @@ pipeline {
                                         stageResultMap.didB1Succeed = true
                                     }
                                     catch (Exception e) {
-                                        currentBuild.result = 'FAILURE'
+                                        // currentBuild.result = 'FAILURE'
                                         stageResultMap.didB1Succeed = false                                        
                                     }
                                 }
@@ -42,8 +42,9 @@ pipeline {
                                 }
                             }
                             steps {
+                                script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
-                                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                                //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                                     sh "echo Hello"
                                 }
                             }
