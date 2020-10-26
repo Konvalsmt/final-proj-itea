@@ -17,24 +17,24 @@ pipeline {
             }
         }
         
-        stage('Check if exist structure') {
+        stage('Check if exist structure terraform') {
                             steps {
                                 script {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
                                     try {                                        
                                         sh "cp ../inventory /ansible-itea/inventory"
-                                        stageResultMap.didB1Succeed = true
+                                        stageResultMap.didB1Succeed = false
                                     }
                                     catch (Exception e) {
                                         // currentBuild.result = 'FAILURE'
-                                        stageResultMap.didB1Succeed = false                                        
+                                        stageResultMap.didB1Succeed = true                                        
                                     }
                                 }
                             }
                         }
             
-                         stage('C1') {
+                         stage('Create strucrure terraform') {
                             // Execute only if B1 succeeded
                             when {
                                 expression {
