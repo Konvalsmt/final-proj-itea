@@ -10,13 +10,14 @@ pipeline {
     }
  
     stages {
+        
         stage('A') {
             steps {
                 println("This is stage: ${STAGE_NAME}")
             }
         }
         
-                        stage('Check if exist structure') {
+        stage('Check if exist structure') {
                             steps {
                                 script {
                                     // Catch exceptions, set the stage result as unstable,
@@ -47,7 +48,7 @@ pipeline {
                                 }
                             }
                         }
-                        
+    }                  
                         
 }
 
