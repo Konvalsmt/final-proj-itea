@@ -24,17 +24,17 @@ pipeline {
                                     // build result as failure, and the variable didB1Succeed to false
                                     try {                                        
                                         sh "cp ../inventory /ansible-itea/inventory"
-                                        stageResultMap.didB1Succeed = false
+                                        stageResultMap.didB1Succeed = true
                                     }
                                     catch (Exception e) {
                                         // currentBuild.result = 'FAILURE'
-                                        stageResultMap.didB1Succeed = true                                        
+                                        stageResultMap.didB1Succeed = false                                        
                                     }
                                 }
                             }
                         }
-            
-                         stage('Create strucrure terraform') {
+        
+                stage('Docker apply ansible') {
                             // Execute only if B1 succeeded
                             when {
                                 expression {
@@ -45,7 +45,23 @@ pipeline {
                                // script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                                    sh "echo Hello"
+                                    sh "echo Ansible"
+                                //}
+                            }
+                        }
+            
+                         stage('Create strucrure terraform') {
+                            // Execute only if B1 not succeeded
+                            when {
+                                expression {
+                                    return stageResultMap.find{ it.key != "didB1Succeed" }?.value
+                                }
+                            }
+                            steps {
+                               // script {
+                                // Mark the stage and build results as failure on error but continue pipeline execution
+                                //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                                    sh "echo Terraform"
                                 //}
                             }
                         }
