@@ -54,7 +54,7 @@ pipeline {
                             // Execute only if B1 not succeeded
                             when {
                                 expression {
-                                    return stageResultMap.find{ it.key != "didB1Succeed" }?.value
+                                    return !stageResultMap.find{ it.key == "didB1Succeed" }?.value
                                 }
                             }
                             steps {
