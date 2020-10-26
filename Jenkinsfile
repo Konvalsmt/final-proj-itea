@@ -38,15 +38,15 @@ pipeline {
                             // Execute only if B1 succeeded
                             when {
                                 expression {
-                                    return stageResultMap.find{ it.key != "didB1Succeed" }?.value
+                                    return stageResultMap.find{ it.key == "didB1Succeed" }?.value
                                 }
                             }
                             steps {
                                // script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
-                                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                                //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                                     sh "echo Hello"
-                                }
+                                //}
                             }
                         }
     }                  
