@@ -22,8 +22,11 @@ pipeline {
                                 script {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
-                                    try {                                        
+                                    try {
+                                        sh "pwd"
+                                        sh "pwd -P"
                                         sh "cp ../inventory /ansible-itea/inventory"
+                                        
                                         stageResultMap.didB1Succeed = true
                                     }
                                     catch (Exception e) {
